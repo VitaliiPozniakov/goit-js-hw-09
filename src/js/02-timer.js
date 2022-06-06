@@ -3,7 +3,6 @@ import flatpickr from 'flatpickr';
 // Дополнительный импорт стилей
 import 'flatpickr/dist/flatpickr.min.css';
 
-
 // import Notiflix from 'notiflix';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 
@@ -18,20 +17,20 @@ const refs = {
 };
 
 const options = {
-    enableTime: true,
-    time_24hr: true,
-    defaultDate: new Date(),
-    minuteIncrement: 1,
-    onClose(selectedDates) {
-      //   console.log(selectedDates[0]);
-  
-      chooseDate = selectedDates[0];
-  
-      checkValidDate();
-    },
-  };
-  
-  flatpickr('#datetime-picker', options);
+  enableTime: true,
+  time_24hr: true,
+  defaultDate: new Date(),
+  minuteIncrement: 1,
+  onClose(selectedDates) {
+    //   console.log(selectedDates[0]);
+
+    chooseDate = selectedDates[0];
+
+    checkValidDate();
+  },
+};
+
+flatpickr('#datetime-picker', options);
 
 let chooseDate = null;
 
@@ -39,17 +38,18 @@ refs.btnStart.setAttribute('disabled', '');
 
 refs.btnStart.addEventListener(`click`, onBtnStartClick);
 
-
-
 function checkValidDate() {
   const currentDate = new Date();
-//   console.log(currentDate);
+  //   console.log(currentDate);
   if (chooseDate.getTime() < currentDate.getTime()) {
-Report.warning('Atention', 'Please choose a date in the future', 'Understand');
-return 
-} 
-    refs.btnStart.removeAttribute('disabled', '');
-  
+    Report.warning(
+      'Atention',
+      'Please choose a date in the future',
+      'Understand'
+    );
+    return;
+  }
+  refs.btnStart.removeAttribute('disabled', '');
 }
 
 function onBtnStartClick(e) {
@@ -58,13 +58,24 @@ function onBtnStartClick(e) {
     // console.log(currentDate);
 
     const deltaTime = chooseDate.getTime() - currentDate.getTime();
-
+    console.log(deltaTime);
     const { days, hours, minutes, seconds } = convertMs(deltaTime);
 
+    // console.log(typeof(seconds) )
     refs.daysOutput.textContent = days;
     refs.hoursOutput.textContent = hours;
     refs.minutesOutput.textContent = minutes;
     refs.secondsOutput.textContent = seconds;
+
+    if (
+      refs.daysOutput.textContent === '00' &&
+      refs.hoursOutput.textContent === '00' &&
+      refs.minutesOutput.textContent === '00' &&
+      refs.secondsOutput.textContent === '00'
+    ) {
+      // console.log(`aaaaaaaaaa`)
+      clearInterval(timerId);
+    }
   }, 1000);
 }
 
