@@ -46,9 +46,10 @@ function checkValidDate() {
 //   console.log(currentDate);
   if (chooseDate.getTime() < currentDate.getTime()) {
 Report.warning('Atention', 'Please choose a date in the future', 'Understand');
-  } else {
+return 
+} 
     refs.btnStart.removeAttribute('disabled', '');
-  }
+  
 }
 
 function onBtnStartClick(e) {
