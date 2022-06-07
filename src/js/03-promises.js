@@ -30,10 +30,11 @@ function onFormSubmit(e) {
       })
       .catch(({ position, delay }) => {
         Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
-      });
+      })
+      .finally(() => {
+        e.target.reset();
+      })
   }, delay);
-
-  // event.target.reset();
 }
 
 
