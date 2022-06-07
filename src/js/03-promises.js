@@ -32,7 +32,10 @@ function onFormSubmit(e) {
         Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
       });
   }, Number(refs.delayField.value));
+
+  // event.target.reset();
 }
+
 
 function createPromise(position, delay) {
   const shouldResolve = Math.random() > 0.3;
