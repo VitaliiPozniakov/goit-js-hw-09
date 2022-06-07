@@ -13,10 +13,10 @@ function onFormSubmit(e) {
   e.preventDefault();
 
   let counter = 0;
+  let delay = 0
 
   const timerId = setInterval(() => {
-    const delay =
-      Number(refs.delayField.value) + counter * Number(refs.stepField.value);
+    delay = Number(refs.delayField.value) + counter * Number(refs.stepField.value);
 
     counter += 1;
 
@@ -31,7 +31,7 @@ function onFormSubmit(e) {
       .catch(({ position, delay }) => {
         Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
       });
-  }, Number(refs.delayField.value));
+  }, delay);
 
   // event.target.reset();
 }
