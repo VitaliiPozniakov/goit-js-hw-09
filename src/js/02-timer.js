@@ -22,8 +22,6 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    //   console.log(selectedDates[0]);
-
     chooseDate = selectedDates[0];
 
     checkValidDate();
@@ -40,7 +38,7 @@ refs.btnStart.addEventListener(`click`, onBtnStartClick);
 
 function checkValidDate() {
   const currentDate = new Date();
-  //   console.log(currentDate);
+
   if (chooseDate.getTime() < currentDate.getTime()) {
     Report.warning(
       'Atention',
@@ -55,13 +53,11 @@ function checkValidDate() {
 function onBtnStartClick(e) {
   const timerId = setInterval(() => {
     const currentDate = new Date();
-    // console.log(currentDate);
 
     const deltaTime = chooseDate.getTime() - currentDate.getTime();
-    console.log(deltaTime);
+
     const { days, hours, minutes, seconds } = convertMs(deltaTime);
 
-    // console.log(typeof(seconds) )
     refs.daysOutput.textContent = days;
     refs.hoursOutput.textContent = hours;
     refs.minutesOutput.textContent = minutes;
@@ -73,7 +69,6 @@ function onBtnStartClick(e) {
       refs.minutesOutput.textContent === '00' &&
       refs.secondsOutput.textContent === '00'
     ) {
-      // console.log(`aaaaaaaaaa`)
       clearInterval(timerId);
     }
   }, 1000);

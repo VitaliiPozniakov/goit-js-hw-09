@@ -35,4 +35,3 @@ function getRandomHexColor() {
 function changeBgColor() {
   document.body.style.backgroundColor = `${getRandomHexColor()}`;
 }
-
